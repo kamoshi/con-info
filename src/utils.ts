@@ -15,3 +15,10 @@ export function prepareSchedule(data: any[]): ScheduleEvent[] {
     timeEnd: moment(item.timeEnd),
   }));
 }
+
+export function findProgress(s: moment.Moment, e: moment.Moment, c: moment.Moment): number {
+  if (!s || !e || !c) return 0;
+  const span = moment.duration(e.diff(s)).asSeconds();
+  const curr = moment.duration(c.diff(s)).asSeconds();
+  return curr / span;
+}

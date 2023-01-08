@@ -1,16 +1,56 @@
 <script lang="ts">
+  import type {Moment} from "moment";
+  import {findProgress} from "../utils";
 
+  export let current: ScheduleEvent;
+  export let time: Moment;
+
+  $: percent = findProgress(current?.timeStart, current?.timeEnd, time) * 100;
+  $: percentString = `${percent.toFixed(2)}%`;
 </script>
 
 <section class="timer">
-  <div class="timer__counter">
-    Counter
-  </div>
-  <div class="timer__progress">
-    Progress
-  </div>
+  {#if current}
+    <div class="times">
+      <span>Start: {current.timeStart.format('HH:mm')}</span>
+      <span>Koniec: {current.timeEnd.format('HH:mm')}</span>
+      <span>Aktualny czas: {time.format('HH:mm:ss')}</span>
+    </div>
+    <div class="progress">
+      <span class="percent">{percentString}</span>
+      <div class="bar" style="width:{Math.floor(percent)}%"></div>
+    </div>
+  {/if}
 </section>
 
 <style lang="scss">
-
+  .timer {
+    height: 100%;
+    display: grid;
+    grid-template-rows: 1fr 1fr;
+    font-size: 2rem;
+  }
+  .times {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    grid-gap: 1em;
+  }
+  .progress {
+    position: relative;
+  }
+  .percent {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    z-index: 10;
+  }
+  .bar {
+    position: absolute;
+    left: 0;
+    top: 0;
+    height: 100%;
+    background: lightgray;
+  }
 </style>
