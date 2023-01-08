@@ -22,3 +22,9 @@ export function findProgress(s: moment.Moment, e: moment.Moment, c: moment.Momen
   const curr = moment.duration(c.diff(s)).asSeconds();
   return curr / span;
 }
+
+export function eventsSorted(events: ScheduleEvent[]): ScheduleEvent[] {
+  const copy = (!!events) ? [...events] : [];
+  copy.sort((a, b) => a.timeStart.valueOf() - b.timeStart.valueOf());
+  return copy;
+}

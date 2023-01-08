@@ -3,18 +3,18 @@
     "name": "Poggers panel 1",
     "image": "poggers1.jpg",
     "timeStart": "2023-01-08T15:20:55Z",
-    "timeEnd": "2023-01-08T20:20:55Z"
+    "timeEnd": "2023-01-08T16:20:55Z"
   },
   {
     "name": "Poggers panel 2",
     "image": "poggers2.jpg",
-    "timeStart": 1673194329,
-    "timeEnd": 1673194329
+    "timeStart": "2023-01-08T16:20:55Z",
+    "timeEnd": "2023-01-08T20:20:55Z"
   },
   {
     "name": "Poggers panel 3",
     "image": "poggers3.jpg",
-    "timeStart": 1673194329,
-    "timeEnd": 1673194329
+    "timeStart": "2023-01-08T21:20:55Z",
+    "timeEnd": "2023-01-08T23:20:55Z"
   }
 ]

@@ -17,7 +17,7 @@
       <span>Aktualny czas: {time.format('HH:mm:ss')}</span>
     </div>
     <div class="progress">
-      <span class="percent">{percentString}</span>
+      <div class="percent">{percentString}</div>
       <div class="bar" style="width:{Math.floor(percent)}%"></div>
     </div>
   {/if}
@@ -44,7 +44,6 @@
     align-items: center;
     justify-content: center;
     height: 100%;
-    z-index: 10;
   }
   .bar {
     position: absolute;
@@ -52,5 +51,6 @@
     top: 0;
     height: 100%;
     background: lightgray;
+    z-index: -1;
   }
 </style>
