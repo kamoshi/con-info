@@ -1,0 +1,20 @@
+[
+  {
+    "name": "Poggers panel 1",
+    "image": "poggers.png",
+    "timeStart": 1,
+    "timeEnd": 2
+  },
+  {
+    "name": "Poggers panel 2",
+    "image": "poggers2.png",
+    "timeStart": 1,
+    "timeEnd": 2
+  },
+  {
+    "name": "Poggers panel 3",
+    "image": "poggers3.png",
+    "timeStart": 1,
+    "timeEnd": 2
+  }
+]
