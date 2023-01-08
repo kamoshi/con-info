@@ -29,9 +29,19 @@
 </script>
 
 <section class="videos">
-  <input type="file" bind:files on:change={onFilesChange}>
-
   {#if videoId}
     <YouTube {videoId} on:ready={onPlayerReady} on:end={playVideo} />
+  {:else}
+    <input type="file" bind:files on:change={onFilesChange}>
   {/if}
 </section>
+
+<style lang="scss">
+  .videos {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+  }
+</style>
