@@ -1,19 +1,19 @@
 [
   {
     "name": "Poggers panel 1",
-    "image": "poggers1.jpg",
+    "image": "https://cdn.fanbyte.com/wp-content/uploads/2021/05/Capture_2021-05-11-09-13-49.png?x48911",
     "timeStart": "2023-01-08T15:20:55Z",
     "timeEnd": "2023-01-08T16:20:55Z"
   },
   {
     "name": "Poggers panel 2",
-    "image": "poggers2.jpg",
+    "image": "https://assets.nintendo.com/image/upload/c_fill,w_1200/q_auto:best/f_auto/dpr_2.0/ncom/en_US/games/switch/t/touhou-spell-bubble-switch/hero",
     "timeStart": "2023-01-08T16:20:55Z",
     "timeEnd": "2023-01-08T20:20:55Z"
   },
   {
     "name": "Poggers panel 3",
-    "image": "poggers3.jpg",
+    "image": "https://fs-prod-cdn.nintendo-europe.com/media/images/10_share_images/games_15/nintendo_switch_download_software_1/H2x1_NSwitchDS_TouhouSpellBubble.jpg",
     "timeStart": "2023-01-08T21:20:55Z",
     "timeEnd": "2023-01-08T23:20:55Z"
   }
