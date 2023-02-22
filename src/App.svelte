@@ -1,10 +1,12 @@
 <script lang="ts">
+  import Splash from "./lib/Splash.svelte";
+  import Title from "./lib/Title.svelte";
   import Videos from "./lib/Videos.svelte";
   import Timer from "./lib/Timer.svelte";
   import Schedule from "./lib/Schedule.svelte";
   import {prepareSchedule} from "./utils";
   import dayjs from "dayjs";
-
+  
   let time = dayjs();
   setInterval(() => time = dayjs(), 200);
 
@@ -20,19 +22,17 @@
 
 
 <main class="main">
-  {#if !schedule || !schedule.length}
-  <div class="current">
-    <input type="file" bind:files on:change={onFilesChange}>
+  <div class="splash">
+    {#if !schedule || !schedule.length}
+      <input type="file" bind:files on:change={onFilesChange}>
+    {:else}
+      <Splash splash={current?.imageUrl ?? "public/53031871_p0.jpg"} />
+    {/if}
   </div>
-  {:else if !current}
-  <div class="current placeholder"></div>
-  <div class="title"><div class="title-img placeholder"></div></div>
-  {:else}
-  <div class="current" style='background-image:{`url(${current?.imageUrl})`}'></div>
+
   <div class="title">
-    <div class="title-img" style='background-image:{`url(${current?.titleUrl})`}'></div>
+    <Title image={current?.titleUrl ?? "public/yukkuri.webp"} />
   </div>
-  {/if}
 
   <div class="videos">
     <Videos />
@@ -40,7 +40,6 @@
   <div class="schedule">
     <Schedule {schedule} {time} />
   </div>
-
   <div class="timer">
     <Timer {current} {time} />
   </div>
@@ -52,32 +51,29 @@
     width: 100%;
     height: 100%;
     display: grid;
-    grid-template-columns: 1fr 1fr;
-    grid-template-rows: 1fr 0.5fr 6em;
+    grid-template-columns: 1fr minmax(0, 1fr);
+    grid-template-rows: minmax(0, 1fr) minmax(0, 0.5fr) 6em;
     grid-template-areas:
-            "current videos"
+            "splash videos"
             "title schedule"
             "bottom bottom";
   }
-
+  .splash {
+    grid-area: splash;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
   .title {
-    padding: 2em;
     grid-area: title;
-
-    .title-img {
-      width: 100%;
-      height: 100%;
-      background-repeat: no-repeat;
-      background-size: contain;
-      background-position: center;
-
-      &.placeholder {
-        background-image: url("public/yukkuri.webp");
-      }
-    }
+    padding: 2em;
+    display: flex;
+    align-items: center;
+    justify-content: center;
   }
   .videos {
     grid-area: videos;
+    padding: 3em;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -88,16 +84,6 @@
     display: flex;
     justify-content: center;
     align-items: center;
-  }
-  .current {
-    grid-area: current;
-    background-repeat: no-repeat;
-    background-size: cover;
-    background-position: center;
-
-    &.placeholder {
-      background-image: url("public/53031871_p0.jpg");
-    }
   }
   .timer {
     grid-area: bottom;
