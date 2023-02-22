@@ -8,17 +8,16 @@
   $: sorted = eventsSorted(schedule || []);
   $: prev = sorted.map((event: ScheduleEvent) => time.isAfter(event.timeEnd)).lastIndexOf(true);
   $: next = sorted.findIndex((event: ScheduleEvent) => time.isBefore(event.timeStart));
-  $: index = sorted.findIndex((event: ScheduleEvent) => time.isAfter(event.timeStart) && time.isBefore(event.timeEnd));
+  $: curr = sorted.findIndex((event: ScheduleEvent) => time.isAfter(event.timeStart) && time.isBefore(event.timeEnd));
 
-  $: eventPrev = sorted?.[index - 1];
-  $: eventCurr = sorted?.[index];
-  $: eventNext = sorted?.[index + 1];
+  $: eventPrev = sorted?.[prev];
+  $: eventCurr = sorted?.[curr];
+  $: eventNext = sorted?.[next];
 </script>
 
 
 <section class="schedule">
   <h3 class="heading">Harmonogram</h3>
-  {#if index >= 0}
   <ul class="list">
     <li class="list-item">
       <span>{eventPrev?.name || '-'}</span>
@@ -26,7 +25,7 @@
       <span>{eventPrev?.timeEnd.format('HH:mm') || ''}</span>
     </li>
     <li class="list-item curr">
-      <span>{eventCurr?.name || '-'}</span>
+      <span>{eventCurr?.name || 'Przerwa'}</span>
       <span>{eventCurr?.timeStart.format('HH:mm') || ''}</span>
       <span>{eventCurr?.timeEnd.format('HH:mm') || ''}</span>
     </li>
@@ -35,7 +34,6 @@
       <span>{eventNext?.timeStart.format('HH:mm') || ''}</span>
       <span>{eventNext?.timeEnd.format('HH:mm') || ''}</span>
   </ul>
-  {/if}
 </section>
 
 
