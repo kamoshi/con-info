@@ -40,22 +40,23 @@
     padding: 1em;
     background: white;
     box-shadow: rgba(0, 0, 0, 0.35) 0 5px 15px;
-  }
-  .heading {
-    font-size: 2em;
-    margin: 0;
-  }
-  .list {
-    margin: 0.5em 0 0 0;
-    padding: 0;
-    list-style: none;
-    font-size: 1.3rem;
-  }
-  .list-item {
-    display: grid;
-    grid-template-columns: auto 4em 4em;
-  }
-  .curr {
-    font-weight: bold;
+
+    .heading {
+      font-size: 2em;
+      margin: 0;
+    }
+    .list {
+      margin: 0.5em 0 0 0;
+      padding: 0;
+      list-style: none;
+      font-size: 1.3rem;
+    }
+    .list-item {
+      display: grid;
+      grid-template-columns: auto 4em 4em;
+    }
+    .curr {
+      font-weight: bold;
+    }
   }
 </style>

@@ -29,28 +29,29 @@
     display: grid;
     grid-template-rows: 1fr 1fr;
     font-size: 2rem;
-  }
-  .times {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    grid-gap: 1em;
-  }
-  .progress {
-    position: relative;
-  }
-  .percent {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    height: 100%;
-  }
-  .bar {
-    position: absolute;
-    left: 0;
-    top: 0;
-    height: 100%;
-    background: lightgray;
-    z-index: -1;
+
+    .times {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      grid-gap: 1em;
+    }
+    .progress {
+      position: relative;
+    }
+    .percent {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 100%;
+    }
+    .bar {
+      position: absolute;
+      left: 0;
+      top: 0;
+      height: 100%;
+      background: lightgray;
+      z-index: -1;
+    }
   }
 </style>
