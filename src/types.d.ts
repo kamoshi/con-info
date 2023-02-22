@@ -1,8 +1,7 @@
-
-
 interface ScheduleEvent {
-  name: string,
-  image: string,
-  timeStart: moment.Moment,
-  timeEnd: moment.Moment,
+  name: string;
+  imageUrl: string;
+  titleUrl: string;
+  timeStart: any; // dayjs
+  timeEnd: any; // dayjs
 }

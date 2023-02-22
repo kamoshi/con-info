@@ -2,7 +2,7 @@
   import YouTube from 'svelte-youtube';
   import {extractIds} from "../utils";
 
-  let files: File[];
+  let files: FileList;
   let videos: string[];
   let videoId: string;
 
@@ -30,9 +30,10 @@
 
 <section class="videos">
   {#if videoId}
-    <YouTube {videoId} on:ready={onPlayerReady} on:end={playVideo} />
+    <YouTube class="aaa" {videoId} on:ready={onPlayerReady} on:end={playVideo} />
   {:else}
     <input type="file" bind:files on:change={onFilesChange}>
+    <div></div>
   {/if}
 </section>
 

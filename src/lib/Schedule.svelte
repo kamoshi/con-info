@@ -1,12 +1,12 @@
 <script lang="ts">
   import {eventsSorted} from "../utils";
-  import type {Moment} from "moment";
+  import type {Dayjs} from "dayjs";
 
   export let schedule: ScheduleEvent[];
-  export let time: Moment;
+  export let time: Dayjs;
 
   $: sorted = eventsSorted(schedule || []);
-  $: index = sorted.findIndex((event: ScheduleEvent) => time.isBetween(event.timeStart, event.timeEnd));
+  $: index = sorted.findIndex((event: ScheduleEvent) => time.isAfter(event.timeStart) && time.isBefore(event.timeEnd));
 
   $: eventPrev = sorted?.[index - 1];
   $: eventCurr = sorted?.[index];

@@ -1,16 +1,16 @@
 <script lang="ts">
-  import moment from "moment";
   import Videos from "./lib/Videos.svelte";
   import Timer from "./lib/Timer.svelte";
   import Schedule from "./lib/Schedule.svelte";
   import {prepareSchedule} from "./utils";
+  import dayjs from "dayjs";
 
-  let time = moment();
-  setInterval(() => time = moment(), 200);
+  let time = dayjs();
+  setInterval(() => time = dayjs(), 200);
 
-  let files: File[];
+  let files: FileList;
   let schedule: ScheduleEvent[] = [];
-  $: current = schedule.find(event => time.isBetween(event.timeStart, event.timeEnd));
+  $: current = schedule.find(event => time.isAfter(event.timeStart) && time.isBefore(event.timeEnd));
 
   async function onFilesChange() {
     const data = await files[0].text();
@@ -18,22 +18,28 @@
   }
 </script>
 
+
 <main class="main">
-  <div class="main__current" style='background-image:{`url(${current?.image})`}'>
+  <div class="current" style='background-image:{`url(${current?.imageUrl})`}'>
     {#if !current}
       <input type="file" bind:files on:change={onFilesChange}>
     {/if}
   </div>
-  <div class="main__schedule">
-    <Schedule {schedule} {time} />
+  <div class="title">
+    <div class="title-img" style='background-image:{`url(${current?.titleUrl})`}'></div>
   </div>
-  <div class="main__right">
+  <div class="videos">
     <Videos />
   </div>
-  <div class="main__bottom">
+  <div class="schedule">
+    <Schedule {schedule} {time} />
+  </div>
+
+  <div class="timer">
     <Timer {current} {time} />
   </div>
 </main>
+
 
 <style lang="scss">
   .main {
@@ -41,26 +47,37 @@
     grid-template-columns: 1fr 1fr;
     grid-template-rows: 1fr 0.5fr 6em;
     grid-template-areas:
-            "current right"
-            "schedule right"
+            "current videos"
+            "title schedule"
             "bottom bottom";
     width: 100%;
     height: 100%;
+  }
+  .title {
+    padding: 2em;
+    grid-area: title;
 
-    &__current {
-      grid-area: current;
+    .title-img {
+      width: 100%;
+      height: 100%;
       background-repeat: no-repeat;
       background-size: cover;
+      background-position: center;
     }
-    &__schedule {
-      padding: 2em;
-      grid-area: schedule;
-    }
-    &__right {
-      grid-area: right;
-    }
-    &__bottom {
-      grid-area: bottom;
-    }
+  }
+  .videos {
+    grid-area: videos;
+  }
+  .schedule {
+    padding: 2em;
+    grid-area: schedule;
+  }
+  .current {
+    grid-area: current;
+    background-repeat: no-repeat;
+    background-size: cover;
+  }
+  .timer {
+    grid-area: bottom;
   }
 </style>

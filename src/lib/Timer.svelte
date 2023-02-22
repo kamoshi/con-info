@@ -1,9 +1,9 @@
 <script lang="ts">
-  import type {Moment} from "moment";
+  import type {Dayjs} from "dayjs";
   import {findProgress} from "../utils";
 
   export let current: ScheduleEvent;
-  export let time: Moment;
+  export let time: Dayjs;
 
   $: percent = findProgress(current?.timeStart, current?.timeEnd, time) * 100;
   $: percentString = `${percent.toFixed(2)}%`;

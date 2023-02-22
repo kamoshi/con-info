@@ -20,7 +20,7 @@
     "vite": "^4.0.0"
   },
   "dependencies": {
-    "moment": "^2.29.4",
+    "dayjs": "^1.11.7",
     "svelte-youtube": "^0.0.2"
   }
 }
