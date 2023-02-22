@@ -15,17 +15,12 @@
       <span>Koniec: {current.timeEnd.format('HH:mm')}</span>
       <span>Aktualny czas: {time.format('HH:mm:ss')}</span>
     </div>
-    <div class="progress">
-      <div class="percent">{`${percent.toFixed(2)}%`}</div>
-      <div class="bar" style="width:{Math.floor(percent)}%"></div>
-    </div>
+    <div class="progress" style="--poggers:{Math.floor(percent)}%">{`${percent.toFixed(2)}%`}</div>
   {:else}
     <div class="times">
       <span>Aktualny czas: {time.format('HH:mm:ss')}</span>
     </div>
-    <div class="progress">
-      <div class="percent">Przerwa</div>
-    </div>
+    <div class="progress">Przerwa</div>
   {/if}
 </section>
 
@@ -45,21 +40,22 @@
     }
     .progress {
       position: relative;
-    }
-    .percent {
       display: flex;
       align-items: center;
       justify-content: center;
       height: 100%;
       z-index: 3213;
-    }
-    .bar {
-      position: absolute;
-      left: 0;
-      top: 0;
-      height: 100%;
-      background: lightgray;
-      z-index: -1;
+
+      &::after {
+        content: '';
+        position: absolute;
+        left: 0;
+        top: 0;
+        height: 100%;
+        width: var(--poggers);
+        z-index: -1;
+        background: #b3e5fc;
+      }
     }
   }
 </style>
