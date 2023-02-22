@@ -21,7 +21,7 @@
 
 <main class="main">
   <div class="current" style='background-image:{`url(${current?.imageUrl})`}'>
-    {#if !current}
+    {#if !schedule || !schedule.length}
       <input type="file" bind:files on:change={onFilesChange}>
     {/if}
   </div>
@@ -61,7 +61,7 @@
       width: 100%;
       height: 100%;
       background-repeat: no-repeat;
-      background-size: cover;
+      background-size: contain;
       background-position: center;
     }
   }
