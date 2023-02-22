@@ -26,12 +26,12 @@
     {#if !schedule || !schedule.length}
       <input type="file" bind:files on:change={onFilesChange}>
     {:else}
-      <Splash splash={current?.imageUrl ?? "public/53031871_p0.jpg"} />
+      <Splash splash={current?.imageUrl ?? "53031871_p0.jpg"} />
     {/if}
   </div>
 
   <div class="title">
-    <Title image={current?.titleUrl ?? "public/yukkuri.webp"} />
+    <Title image={current?.titleUrl ?? "yukkuri.webp"} />
   </div>
 
   <div class="videos">
