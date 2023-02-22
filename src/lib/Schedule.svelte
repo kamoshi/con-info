@@ -16,24 +16,21 @@
 </script>
 
 
-<section class="schedule">
+<section class="schedule nice-box">
   <h3 class="heading">Harmonogram</h3>
-  <ul class="list">
-    <li class="list-item">
-      <span>{eventPrev?.name || '-'}</span>
-      <span>{eventPrev?.timeStart.format('HH:mm') || ''}</span>
-      <span>{eventPrev?.timeEnd.format('HH:mm') || ''}</span>
-    </li>
-    <li class="list-item curr">
-      <span>{eventCurr?.name || 'Przerwa'}</span>
-      <span>{eventCurr?.timeStart.format('HH:mm') || ''}</span>
-      <span>{eventCurr?.timeEnd.format('HH:mm') || ''}</span>
-    </li>
-    <li class="list-item">
-      <span>{eventNext?.name || '-'}</span>
-      <span>{eventNext?.timeStart.format('HH:mm') || ''}</span>
-      <span>{eventNext?.timeEnd.format('HH:mm') || ''}</span>
-  </ul>
+  <div class="events">
+    <span class="name">{eventPrev?.name || '---'}</span>
+    <span class="right">{eventPrev?.timeStart.format('HH:mm') || ''}</span>
+    <span class="right">{eventPrev?.timeEnd.format('HH:mm') || ''}</span>
+    <!--  -->
+    <span class="now name">{eventCurr?.name || 'Przerwa'}</span>
+    <span class="now right">{eventCurr?.timeStart.format('HH:mm') || ''}</span>
+    <span class="now right">{eventCurr?.timeEnd.format('HH:mm') || ''}</span>
+    <!--  -->
+    <span class="name">{eventNext?.name || '---'}</span>
+    <span class="right">{eventNext?.timeStart.format('HH:mm') || ''}</span>
+    <span class="right">{eventNext?.timeEnd.format('HH:mm') || ''}</span>
+  </div>
 </section>
 
 
@@ -41,24 +38,30 @@
   .schedule {
     padding: 1em;
     background: white;
-    box-shadow: rgba(0, 0, 0, 0.35) 0 5px 15px;
 
     .heading {
       font-size: 2em;
-      margin: 0;
+      margin: 0 0 0.5em 0;
     }
-    .list {
-      margin: 0.5em 0 0 0;
-      padding: 0;
-      list-style: none;
-      font-size: 1.3rem;
-    }
-    .list-item {
+    .events {
       display: grid;
-      grid-template-columns: auto 4em 4em;
-    }
-    .curr {
-      font-weight: bold;
+      grid-template-columns: 1fr 3em 3em;
+      column-gap: 0.25em;
+      font-size: 1.2em;
+
+      .now {
+        font-weight: bold;
+      }
+      .name {
+        min-width: 16em;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+      }
+      .right {
+        display: flex;
+        justify-content: flex-end;
+      }
     }
   }
 </style>

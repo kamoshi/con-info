@@ -6,7 +6,6 @@
   export let time: Dayjs;
 
   $: percent = findProgress(current?.timeStart, current?.timeEnd, time) * 100;
-  $: percentString = `${percent.toFixed(2)}%`;
 </script>
 
 <section class="timer">
@@ -17,8 +16,15 @@
       <span>Aktualny czas: {time.format('HH:mm:ss')}</span>
     </div>
     <div class="progress">
-      <div class="percent">{percentString}</div>
+      <div class="percent">{`${percent.toFixed(2)}%`}</div>
       <div class="bar" style="width:{Math.floor(percent)}%"></div>
+    </div>
+  {:else}
+    <div class="times">
+      <span>Aktualny czas: {time.format('HH:mm:ss')}</span>
+    </div>
+    <div class="progress">
+      <div class="percent">Przerwa</div>
     </div>
   {/if}
 </section>
@@ -29,6 +35,7 @@
     display: grid;
     grid-template-rows: 1fr 1fr;
     font-size: 2rem;
+    z-index: 0;
 
     .times {
       display: flex;
@@ -44,6 +51,7 @@
       align-items: center;
       justify-content: center;
       height: 100%;
+      z-index: 3213;
     }
     .bar {
       position: absolute;

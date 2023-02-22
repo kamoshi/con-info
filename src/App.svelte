@@ -20,14 +20,20 @@
 
 
 <main class="main">
-  <div class="current" style='background-image:{`url(${current?.imageUrl})`}'>
-    {#if !schedule || !schedule.length}
-      <input type="file" bind:files on:change={onFilesChange}>
-    {/if}
+  {#if !schedule || !schedule.length}
+  <div class="current">
+    <input type="file" bind:files on:change={onFilesChange}>
   </div>
+  {:else if !current}
+  <div class="current placeholder"></div>
+  <div class="title"><div class="title-img placeholder"></div></div>
+  {:else}
+  <div class="current" style='background-image:{`url(${current?.imageUrl})`}'></div>
   <div class="title">
     <div class="title-img" style='background-image:{`url(${current?.titleUrl})`}'></div>
   </div>
+  {/if}
+
   <div class="videos">
     <Videos />
   </div>
@@ -43,6 +49,8 @@
 
 <style lang="scss">
   .main {
+    width: 100%;
+    height: 100%;
     display: grid;
     grid-template-columns: 1fr 1fr;
     grid-template-rows: 1fr 0.5fr 6em;
@@ -50,9 +58,8 @@
             "current videos"
             "title schedule"
             "bottom bottom";
-    width: 100%;
-    height: 100%;
   }
+
   .title {
     padding: 2em;
     grid-area: title;
@@ -63,19 +70,34 @@
       background-repeat: no-repeat;
       background-size: contain;
       background-position: center;
+
+      &.placeholder {
+        background-image: url("public/yukkuri.webp");
+      }
     }
   }
   .videos {
     grid-area: videos;
+    display: flex;
+    justify-content: center;
+    align-items: center;
   }
   .schedule {
-    padding: 2em;
     grid-area: schedule;
+    padding: 2em;
+    display: flex;
+    justify-content: center;
+    align-items: center;
   }
   .current {
     grid-area: current;
     background-repeat: no-repeat;
     background-size: cover;
+    background-position: center;
+
+    &.placeholder {
+      background-image: url("public/53031871_p0.jpg");
+    }
   }
   .timer {
     grid-area: bottom;

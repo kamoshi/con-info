@@ -28,21 +28,9 @@
   }
 </script>
 
-<section class="videos">
-  {#if videoId}
-    <YouTube class="aaa" {videoId} on:ready={onPlayerReady} on:end={playVideo} />
-  {:else}
-    <input type="file" bind:files on:change={onFilesChange}>
-    <div></div>
-  {/if}
-</section>
 
-<style lang="scss">
-  .videos {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    height: 100%;
-  }
-</style>
+{#if videoId}
+  <YouTube class="video-screen nice-box" {videoId} on:ready={onPlayerReady} on:end={playVideo} />
+{:else}
+  <input type="file" bind:files on:change={onFilesChange}>
+{/if}

@@ -28,3 +28,13 @@ body {
   height: 100vh;
   overflow: hidden;
 }
+
+.nice-box {
+  border-radius: 6px;
+  box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+  overflow: hidden;
+}
+
+.video-screen iframe {
+  display: block;
+}
