@@ -15,12 +15,17 @@
       <span>Koniec: {current.timeEnd.format('HH:mm')}</span>
       <span>Aktualny czas: {time.format('HH:mm:ss')}</span>
     </div>
-    <div class="progress" style="--poggers:{Math.floor(percent)}%">{`${percent.toFixed(2)}%`}</div>
+    <div class="progress">
+      <div class="back">{`${percent.toFixed(2)}%`}</div>
+      <div class="fore" style="--poggers:{Math.floor(percent)}%">{`${percent.toFixed(2)}%`}</div>
+    </div>
   {:else}
     <div class="times">
       <span>Aktualny czas: {time.format('HH:mm:ss')}</span>
     </div>
-    <div class="progress">Przerwa</div>
+    <div class="progress">
+      <div class="back">Przerwa</div>
+    </div>
   {/if}
 </section>
 
@@ -40,21 +45,32 @@
     }
     .progress {
       position: relative;
-      display: flex;
-      align-items: center;
-      justify-content: center;
       height: 100%;
-      z-index: 3213;
+      border-top: 2px solid #465298;
 
-      &::after {
-        content: '';
-        position: absolute;
-        left: 0;
-        top: 0;
+      .back, .fore {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+      .back {
+        width: 100%;
         height: 100%;
-        width: var(--poggers);
-        z-index: -1;
-        background: #b3e5fc;
+        background: repeating-linear-gradient(
+          45deg,
+          #606dbc,
+          #606dbc 10px,
+          #465298 10px,
+          #465298 20px
+        );
+        color: white;
+      }
+      .fore {
+        position: absolute;
+        inset: 0;
+        clip-path: inset(0 0 0 var(--poggers, 100%));
+        background-color: white;
+        transition: clip-path 1s linear;
       }
     }
   }
