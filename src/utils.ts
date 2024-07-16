@@ -16,9 +16,3 @@ export function prepareSchedule(data: any[]): ScheduleEvent[] {
     timeEnd: dayjs(item.timeEnd),
   }));
 }
-
-export function eventsSorted(events: ScheduleEvent[]): ScheduleEvent[] {
-  const copy = (!!events) ? [...events] : [];
-  copy.sort((a, b) => a.timeStart.valueOf() - b.timeStart.valueOf());
-  return copy;
-}

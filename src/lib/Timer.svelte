@@ -23,26 +23,37 @@
 <section class="timer">
 	{#if current}
 		<div class="times">
-			<span>Start: {current.timeStart.format('HH:mm')}</span>
-			<span>Koniec: {current.timeEnd.format('HH:mm')}</span>
-			<span>Aktualny czas: {time.format('HH:mm:ss')}</span>
+			<span>
+				Start: <time>{current.timeStart.format('HH:mm')}</time>
+			</span>
+			<span>
+				Koniec: <time>{current.timeEnd.format('HH:mm')}</time>
+			</span>
+			<span>
+				Aktualny czas: <time>{time.format('HH:mm:ss')}</time>
+			</span>
 		</div>
 		<div class="progress">
-			<div class="back">{`${percent.toFixed(2)}%`}</div>
-			<div class="fore" style="--poggers:{Math.floor(percent)}%">{`${percent.toFixed(2)}%`}</div>
+			<div class="background">{`${percent.toFixed(2)}%`}</div>
+			<div class="foreground" style="--poggers:{Math.floor(percent)}%">{`${percent.toFixed(2)}%`}</div>
 		</div>
 	{:else}
 		<div class="times">
-			<span>Aktualny czas: {time.format('HH:mm:ss')}</span>
+			<span>Aktualny czas: <time>{time.format('HH:mm:ss')}</time></span>
 		</div>
 		<div class="progress">
-			<div class="back">Przerwa</div>
+			<div class="background">Przerwa</div>
 		</div>
 	{/if}
 </section>
 
 <style lang="scss">
+	time {
+		font-weight: 700;
+	}
+
 	.timer {
+		grid-area: bottom;
 		height: 100%;
 		display: grid;
 		grid-template-rows: 1fr 1fr;
@@ -53,19 +64,20 @@
 			display: flex;
 			align-items: center;
 			justify-content: center;
-			grid-gap: 1em;
+			gap: 1em;
 		}
 		.progress {
 			position: relative;
 			height: 100%;
 			border-top: 2px solid #465298;
 
-			.back, .fore {
+			.background, .foreground {
 				display: flex;
 				justify-content: center;
 				align-items: center;
+				font-weight: 1000;
 			}
-			.back {
+			.background {
 				width: 100%;
 				height: 100%;
 				background: repeating-linear-gradient(
@@ -77,7 +89,7 @@
 				);
 				color: white;
 			}
-			.fore {
+			.foreground {
 				position: absolute;
 				inset: 0;
 				clip-path: inset(0 0 0 var(--poggers, 100%));

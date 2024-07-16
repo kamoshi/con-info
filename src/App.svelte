@@ -37,13 +37,8 @@
   </div>
 
 	<Videos />
-
-  <div class="schedule">
-    <Schedule {schedule} {time} />
-  </div>
-  <div class="timer">
-    <Timer {current} {time} />
-  </div>
+	<Schedule {schedule} {time} />
+	<Timer {current} {time} />
 </main>
 
 
@@ -71,15 +66,5 @@
     display: flex;
     align-items: center;
     justify-content: center;
-  }
-  .schedule {
-    grid-area: schedule;
-    padding: 2em;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-  }
-  .timer {
-    grid-area: bottom;
   }
 </style>
