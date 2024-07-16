@@ -3,6 +3,10 @@ import { svelte } from '@sveltejs/vite-plugin-svelte'
 
 // https://vitejs.dev/config/
 export default defineConfig({
-  base: '/con-info/',
-  plugins: [svelte()],
+	base: '/',
+	plugins: [svelte({
+		compilerOptions: {
+			runes: true,
+		}
+	})],
 })

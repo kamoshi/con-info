@@ -1,42 +1,43 @@
+<svelte:options runes={true} />
+
 <script lang="ts">
-  import Splash from "./lib/Splash.svelte";
-  import Title from "./lib/Title.svelte";
-  import Videos from "./lib/Videos.svelte";
-  import Timer from "./lib/Timer.svelte";
-  import Schedule from "./lib/Schedule.svelte";
-  import {prepareSchedule} from "./utils";
-  import dayjs from "dayjs";
-  
-  let time = dayjs();
-  setInterval(() => time = dayjs(), 200);
+	import Splash from "./lib/Splash.svelte";
+	import Title from "./lib/Title.svelte";
+	import Videos from "./lib/Videos.svelte";
+	import Timer from "./lib/Timer.svelte";
+	import Schedule from "./lib/Schedule.svelte";
+	import { prepareSchedule } from "./utils";
+	import dayjs from "dayjs";
 
-  let files: FileList;
-  let schedule: ScheduleEvent[] = [];
-  $: current = schedule.find(event => time.isAfter(event.timeStart) && time.isBefore(event.timeEnd));
+	let time = $state(dayjs());
+	setInterval(() => time = dayjs(), 200);
 
-  async function onFilesChange() {
-    const data = await files[0].text();
-    schedule = prepareSchedule(JSON.parse(data));
-  }
+	let files: FileList = $state();
+	let schedule: ScheduleEvent[] = $state([]);
+	let current = $derived(schedule.find(event => time.isAfter(event.timeStart) && time.isBefore(event.timeEnd)));
+
+	async function onFilesChange() {
+		const data = await files[0].text();
+		schedule = prepareSchedule(JSON.parse(data));
+	}
 </script>
 
 
 <main class="main">
-  <div class="splash">
-    {#if !schedule || !schedule.length}
-      <input type="file" bind:files on:change={onFilesChange}>
-    {:else}
-      <Splash splash={current?.imageUrl ?? "53031871_p0.jpg"} />
-    {/if}
-  </div>
+	<div class="splash">
+		{#if !schedule || !schedule.length}
+			<input type="file" bind:files onchange={onFilesChange}>
+		{:else}
+			<Splash splash={current?.imageUrl ?? "53031871_p0.jpg"} />
+		{/if}
+	</div>
 
   <div class="title">
-    <Title image={current?.titleUrl ?? "yukkuri.webp"} />
+    <Title image={current?.titleUrl || "yukkuri.webp"} />
   </div>
 
-  <div class="videos">
-    <Videos />
-  </div>
+	<Videos />
+
   <div class="schedule">
     <Schedule {schedule} {time} />
   </div>
@@ -70,13 +71,6 @@
     display: flex;
     align-items: center;
     justify-content: center;
-  }
-  .videos {
-    grid-area: videos;
-    padding: 3em;
-    display: flex;
-    justify-content: center;
-    align-items: center;
   }
   .schedule {
     grid-area: schedule;

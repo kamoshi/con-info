@@ -1,5 +1,11 @@
+<svelte:options runes={true} />
+
 <script lang="ts">
-  export let image: string;
+	interface Props {
+		image: string;
+	}
+
+	let { image }: Props = $props();
 </script>
 
 
@@ -7,9 +13,9 @@
 
 
 <style lang="scss">
-  .title-image {
-    max-width: 100%;
-    max-height: 100%;
-    object-fit: contain;
-  }
+	.title-image {
+		max-width: 100%;
+		max-height: 100%;
+		object-fit: contain;
+	}
 </style>

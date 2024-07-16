@@ -17,13 +17,6 @@ export function prepareSchedule(data: any[]): ScheduleEvent[] {
   }));
 }
 
-export function findProgress(s: dayjs.Dayjs, e: dayjs.Dayjs, c: dayjs.Dayjs): number {
-  if (!s || !e || !c) return 0;
-  const span = e.diff(s, 'seconds');
-  const curr = c.diff(s, 'seconds');
-  return curr / span;
-}
-
 export function eventsSorted(events: ScheduleEvent[]): ScheduleEvent[] {
   const copy = (!!events) ? [...events] : [];
   copy.sort((a, b) => a.timeStart.valueOf() - b.timeStart.valueOf());

@@ -1,36 +1,72 @@
 <script lang="ts">
-  import YouTube from 'svelte-youtube';
-  import {extractIds} from "../utils";
+	let player: HTMLMediaElement = $state();
 
-  let files: FileList;
-  let videos: string[];
-  let videoId: string;
+	interface VideoItem {
+		file: string;
+		title: string;
+	}
 
-  function random(arr: string[]): string {
-    return arr[Math.floor(Math.random() * arr.length)];
-  }
+	let files: FileList = $state();
+	let data: VideoItem[] = $state();
+	let link: VideoItem = $state();
 
-  async function onFilesChange() {
-    const data = await files[0].text();
-    if (!data) return videos = [];
+	function random<T>(arr: T[]): T {
+		return arr[Math.floor(Math.random() * arr.length)];
+	}
 
-    videos = extractIds(JSON.parse(data));
-    videoId = random(videos);
-  }
+	async function reload() {
+		try {
+			const json = await files[0].text();
+			if (!json) return data = [];
 
-  function onPlayerReady(event) {
-    setTimeout(() => event.detail.target.playVideo(), 1000);
-  }
+			data = JSON.parse(json);
+			link = random(data);
+		} catch (_) {
+			data = [];
+			link = undefined;
+		}
+	}
 
-  function playVideo(event) {
-    videoId = random(videos);
-    setTimeout(() => event.detail.target.playVideo(), 1000);
-  }
+	function play(_: Event) {
+		setTimeout(() => player.play(), 500);
+	}
+
+	function next(_: Event) {
+		link = random(data);
+		setTimeout(() => player.load(), 500);
+	}
 </script>
 
 
-{#if videoId}
-  <YouTube class="video-screen nice-box" {videoId} on:ready={onPlayerReady} on:end={playVideo} />
-{:else}
-  <input type="file" bind:files on:change={onFilesChange}>
-{/if}
+<div class="wrapper">
+	{#if link}
+		<div class="player">
+			<video bind:this={player} oncanplay={play} onended={next}>
+				<source src={link.file}/>
+				<track kind="captions">
+			</video>
+		</div>
+		<h3>{link.title}</h3>
+	{:else}
+		<input type="file" bind:files onchange={reload}/>
+	{/if}
+</div>
+
+<style lang="scss">
+	.wrapper {
+		grid-area: videos;
+		display: flex;
+		flex-direction: column;
+		justify-content: center;
+		align-items: center;
+	}
+	.player {
+		width: 100%;
+		height: 100%;
+	}
+	video {
+		width: 100%;
+		height: 100%;
+		object-fit: cover;
+	}
+</style>
